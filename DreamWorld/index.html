@@ -1,0 +1,242 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bulma CSS template -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+  <!-- Ionicons -->
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <title>DreamWorld</title>
+  <link rel="icon" href="icon.jpg">
+
+  <style>
+    video {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .author-block {
+      display: inline-block;
+      margin-right: 0.25rem;
+    }
+
+    .button {
+      margin: 0.25rem;
+    }
+
+    .section-divider {
+      text-align: center;
+      width: 100%;
+      height: 1.5px;
+      background-color: rgba(0, 0, 0, 0.665);
+      margin-top: 1em;
+    }
+
+    .pipeline-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+
+</head>
+
+<body>
+  <section class="section">
+
+```
+<!-- Header -->
+<div class="container has-text-centered">
+  <p class="title is-3">
+    DreamWorld: Geometry-Grounded Video Diffusion for 3D-Consistent World Modeling
+  </p>
+
+  <br/>
+
+  <p class="subtitle is-4">ECCV 2026</p>
+
+  <!-- Authors -->
+  <p class="title is-5 mt-2">
+    <span class="author-block">Haibo Yang<sup>*</sup>,</span>
+    <span class="author-block">Yang Chen,</span>
+    <span class="author-block">Yingwei Pan,</span>
+    <span class="author-block">Zhineng Chen<sup>†</sup>,</span>
+    <span class="author-block">Ting Yao,</span>
+    <span class="author-block">Tao Mei</span>
+  </p>
+
+  <!-- Affiliations -->
+  <p class="subtitle is-5">
+    Fudan University &nbsp;&nbsp;
+    HiDream.ai Inc.
+  </p>
+
+  <p class="content is-size-6">
+    <sup>*</sup> This work was performed when Haibo Yang was visiting HiDream.ai as a research intern.
+    &nbsp;&nbsp;
+    <sup>†</sup> Corresponding author.
+  </p>
+
+  <!-- Links -->
+  <div class="is-flex is-justify-content-center is-flex-wrap-wrap">
+    <span class="icon-text mx-1">
+      <a class="button is-dark" href="paper.pdf" role="button" target="_blank">
+        <span class="icon">
+          <ion-icon name="document-outline"></ion-icon>
+        </span>
+        <span>Paper</span>
+      </a>
+    </span>
+
+    <span class="icon-text mx-1">
+      <a class="button is-dark" role="button">
+        <span class="icon">
+          <ion-icon name="logo-github"></ion-icon>
+        </span>
+        <span>Code (Coming Soon)</span>
+      </a>
+    </span>
+  </div>
+</div>
+
+<br />
+
+<!-- Main container -->
+<div class="container is-max-desktop has-text-centered">
+
+  <hr class="section-divider">
+
+  <!-- Abstract -->
+  <p class="title is-3 mt-5 has-text-centered">Abstract</p>
+
+  <p class="content is-size-6 has-text-left">
+    Camera-controlled video diffusion models (VDMs) have recently emerged as powerful world models,
+    enabling users to explore 3D scenes through flexible, user-defined camera trajectories.
+    Nevertheless, current VDMs typically rely on implicit spatiotemporal representations without
+    explicit 3D geometric grounding. Such geometry-agnostic modeling often leads to issues including
+    geometrically implausible structures and cross-view spatial inconsistencies. To alleviate this,
+    we present DreamWorld, a new recipe of world model that novelly bridges the strong spatial
+    structure priors of 3D foundation models with the high-fidelity generative capabilities of video
+    diffusion models for geometry-consistent 3D scene generation. Specifically, given the input image
+    and camera trajectory, DreamWorld first learns a geometry video diffusion model to predict compact
+    geometry features for the target novel views, functioning as explicit structure pivots to reflect
+    the underlying 3D spatial layout. To achieve this, we introduce a distillation paradigm that
+    transfers high-level structural knowledge from a pretrained 3D foundation model to the diffusion
+    model, thereby enabling it to produce geometrically consistent and spatially coherent features.
+    Conditioned on such geometry features, another appearance video diffusion model is then utilized
+    to synthesize the final video, ensuring improved geometric plausibility and cross-view consistency
+    while maintaining high visual fidelity. Extensive experiments demonstrate that DreamWorld
+    outperforms existing methods in visual quality, 3D consistency, and camera controllability.
+  </p>
+
+  <hr class="section-divider">
+
+  <!-- Overview -->
+  <p class="title is-3 mt-5 has-text-centered">Overview</p>
+
+  <figure class="image mt-4 mb-5">
+    <img class="pipeline-image" src="asserts\pipeline.jpg" alt="DreamWorld pipeline">
+  </figure>
+
+  <p class="content is-size-6 has-text-left">
+DreamWorld bridges the strong spatial structural priors of 3D foundation models with the high-fidelity generative capabilities of video diffusion models for 3D-consistent world modeling. Given an input image and a user-defined camera trajectory, DreamWorld first trains a geometry video diffusion model to predict complete geometry-aware representations for target novel views from incomplete warped observations. These predicted geometry features function as explicit structural pivots that reflect the underlying 3D spatial layout of the scene. Conditioned on such geometry features, an appearance video diffusion model then synthesizes the final high-fidelity RGB frames. In this way, DreamWorld triggers 3D-consistent world modeling in a geometry-appearance disentangled two-stage fashion, where the geometry stage focuses on structural consistency and camera adherence, while the appearance stage emphasizes photorealistic details and visual fidelity.
+
+  </p>
+
+  <hr class="section-divider">
+
+  <!-- Results: qualitative comparison -->
+  <p class="title is-3 mt-5 has-text-centered">
+    1. Qualitative Comparison Against Baselines
+  </p>
+
+  <p class="content has-text-centered is-size-5">
+    DreamWorld pivots on a decoupled geometry-grounded paradigm for 3D world modeling,
+    yielding high-fidelity novel-view sequences with strong 3D consistency, while avoiding
+    warping-induced artifacts and geometrically implausible distortions.
+  </p>
+
+  <video muted autoplay controls loop>
+    <source src="asserts/1.mp4" type="video/mp4">
+  </video>
+
+  <video muted autoplay controls loop>
+    <source src="asserts/2.mp4" type="video/mp4">
+  </video>
+
+  <hr class="section-divider">
+
+  <!-- More qualitative results -->
+  <p class="title is-3 mt-5 has-text-centered">
+    2. More Qualitative Results of DreamWorld
+  </p>
+
+  <p class="content has-text-centered is-size-5">
+    To showcase the versatility of our paradigm, we present a wide range of results spanning
+    intricate indoor environments, expansive outdoor landscapes, and challenging out-of-domain
+    scenarios that highlight the robust generalization ability of DreamWorld.
+  </p>
+
+  <video muted autoplay controls loop>
+    <source src="asserts/3.mp4" type="video/mp4">
+  </video>
+
+  <video muted autoplay controls loop>
+    <source src="asserts/4.mp4" type="video/mp4">
+  </video>
+
+  <video muted autoplay controls loop>
+    <source src="asserts/5.mp4" type="video/mp4">
+  </video>
+
+  <video muted autoplay controls loop>
+    <source src="asserts/6.mp4" type="video/mp4">
+  </video>
+
+  <video muted autoplay controls loop>
+    <source src="asserts/7.mp4" type="video/mp4">
+  </video>
+
+  <!-- Citation -->
+  <div class="card mt-5">
+    <header class="card-header">
+      <p class="card-header-title">Citation</p>
+    </header>
+
+    <div class="card-content is-size-6 has-text-left">
+
+
+<pre><code>@inproceedings{yang2026dreamworld,
+  title={DreamWorld: Geometry-Grounded Video Diffusion for 3D-Consistent World Modeling},
+  author={Haibo Yang and Yang Chen and Yingwei Pan and Zhineng Chen and Ting Yao and Tao Mei},
+  booktitle={ECCV},
+  year={2026}
+}</code></pre>
+
+
+    </div>
+  </div>
+
+</div>
+```
+
+  </section>
+</body>
+</html>
